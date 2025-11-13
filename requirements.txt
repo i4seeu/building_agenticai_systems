@@ -1,0 +1,17 @@
+# Minimal dependencies for examples in this repository
+# Adjust versions or add/remove packages based on the example you plan to run.
+
+numpy>=1.24
+scipy>=1.10
+requests>=2.31
+transformers>=4.40
+sentence-transformers>=2.2
+faiss-cpu>=1.7
+gym>=0.26
+tqdm>=4.65
+jupyter>=1.0
+pytest>=7.3
+
+# For PyTorch-based examples; choose the appropriate wheel for CPU or GPU
+# See https://pytorch.org/get-started/locally/ for recommended install commands
+torch>=2.2.0
