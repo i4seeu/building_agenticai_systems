@@ -104,7 +104,7 @@ Before running any agent script, ensure you have:
 
 1. **Python Environment Activated**:
    ```bash
-   cd /Users/noordeenmalango/Desktop/research_projects/agenticai_systems
+   python -m venv venv
    source .venv/bin/activate
    ```
 
