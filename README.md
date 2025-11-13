@@ -106,13 +106,3 @@ This repository does not yet include a license file. Consider adding one (MIT is
 ## Contact / Maintainers
 
 If you want to collaborate, open an issue or create a PR. For discussions, include clear reproducible steps and expected outcomes.
-
----
-
-If you want, I can:
-
-- add a `LICENSE` file (MIT) and commit it
-- create a simple example under `agents/` (a tiny agent loop with a README)
-- add minimal CI to run linting/tests for examples
-
-Tell me which of the above you'd like next and I'll implement it.
