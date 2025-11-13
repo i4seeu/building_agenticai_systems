@@ -16,7 +16,7 @@ A curated collection of scripts, patterns, and small examples for building agent
 
 ## Repo layout (recommended)
 
-This repository will contain multiple folders, each focusing on a technique or subsystem. Example structure:
+This repository contain multiple folders, each focusing on a technique or subsystem:
 
 - `agents/` — small agent implementations and orchestrators
 - `planning/` — symbolic and learned planning examples (MCTS, heuristic search, hierarchical planning)
@@ -26,8 +26,6 @@ This repository will contain multiple folders, each focusing on a technique or s
 - `eval/` — evaluation harnesses, metrics, and scenario definitions
 - `notebooks/` — interactive explorations and visualizations
 - `scripts/` — small helper scripts (data preparation, runners)
-
-Each folder should include a short README explaining the goal of the example and a minimal run command.
 
 ## Getting started (quick)
 
@@ -44,36 +42,13 @@ pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-To run an example, change into the example directory and follow the instructions in that directory's README. Example:
+To run an example, change into the example directory and run the script. 
+Example:
 
 ```bash
-cd agents/simple_reactive
-python run_agent.py --scenario examples/simple_task.json
+cd agents
+python run_agent.py
 ```
-
-If an example needs additional setup (data, keys, model downloads) those steps will be documented next to the example.
-
-## Example contents (what you'll find here)
-
-- small, single-file agents with clear contracts (inputs/outputs, expected environment)
-- test harnesses that simulate scenarios and produce reproducible metrics
-- minimal wrappers for popular libraries (RL, planning) showing how to integrate them into an agent loop
-- short tutorials and notebooks that walk through the internals
-
-## Conventions and recommended contract
-
-Keep examples consistent to make it easy to compare approaches. Recommended minimal contract for each example:
-
-- A README.md describing the purpose and how to run it
-- An entrypoint (`run_*.py` or `main.py`) that accepts CLI args
-- A tiny configuration file (JSON/YAML) for scenarios and seeds
-- Tests or example inputs in `eval/` for reproducibility
-
-Edge cases to consider when running examples:
-
-- missing external API keys (examples should fail fast and explain how to set env variables)
-- large model downloads (document and provide caching instructions)
-- nondeterminism (provide an option to set seeds)
 
 ## Contributing
 
