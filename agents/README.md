@@ -98,6 +98,36 @@ Complete fields: 15/16
 
 ---
 
+### 3. Routing Lesson (`routing_lesson.py`)
+
+**Purpose**: Demonstrates how to route user requests or intermediate outputs to different sub-agents or tools based on intent or content. Useful for building multi-tool agents where specific tasks (e.g., search, calculator, database lookup) are handled by specialized components.
+
+**Technique**:
+- Use a lightweight classifier (LLM-based or rule-based) to determine intent or required capability.
+- Route the request to the appropriate handler (tool/agent) and collect responses.
+- Optionally aggregate or summarize results with a final LLM step.
+
+**Key Concepts**:
+- Intent classification and routing
+- Tool/agent interfaces and contracts (inputs/outputs)
+- Fallback strategies and confidence thresholds
+- Aggregation and final summary prompts
+
+**Usage**:
+```bash
+# Ensure OPENAI_API_KEY is set in ../.env
+python routing_lesson.py
+```
+
+**Requirements**:
+- `langchain-openai`
+- `langchain-core`
+- `dotenv`
+- Any tool-specific client libraries used by handlers (documented in the file)
+- OpenAI API key in `../.env`
+
+---
+
 ## Setting Up Environment
 
 Before running any agent script, ensure you have:
