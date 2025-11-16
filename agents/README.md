@@ -128,6 +128,73 @@ python routing_lesson.py
 
 ---
 
+### 4. Parallel Agents (`parellel_agents.py`)
+
+**Purpose**: Demonstrates concurrent execution of multiple independent tasks using `RunnableParallel` for efficient multi-step processing with final synthesis.
+
+**Technique**:
+- **Step 1 (Parallel Execution)**: Run three independent chains in parallel:
+  - **Summarize Chain**: Generates a concise summary of the topic
+  - **Questions Chain**: Generates three interesting questions about the topic
+  - **Terms Chain**: Identifies 5-10 key terms from the topic
+
+- **Step 2 (Synthesis)**: Combine parallel results using a synthesis prompt that creates a comprehensive answer integrating all outputs
+
+**Key Concepts**:
+- `RunnableParallel` for concurrent execution of independent tasks
+- `RunnablePassthrough` to preserve original input while processing
+- Async processing with `ainvoke()` for non-blocking execution
+- Efficient resource utilization by executing independent chains simultaneously
+- Final aggregation step to synthesize parallel outputs
+
+**Workflow**:
+```
+Input Topic
+    ↓
+┌───────────────────────────────────┐
+│   Execute in Parallel:            │
+├───────────────────────────────────┤
+│ • Summarize      (Chain 1)        │
+│ • Generate Q's   (Chain 2)        │
+│ • Extract Terms  (Chain 3)        │
+│ • Pass Through   (Original input) │
+└───────────────────────────────────┘
+    ↓
+Combine Results (summary, questions, terms, topic)
+    ↓
+Synthesis Prompt
+    ↓
+LLM Processing
+    ↓
+Final Comprehensive Answer
+```
+
+**Usage**:
+```bash
+# Ensure OPENAI_API_KEY is set in ../.env
+python parellel_agents.py
+```
+
+**Output Example**:
+```
+--- Running Parallel LangChain Example for Topic: 'The history of space exploration' ---
+
+--- Final Response ---
+[Comprehensive synthesis combining summary, questions, key terms, and original topic]
+```
+
+**Requirements**:
+- `langchain-openai`
+- `langchain-core`
+- `dotenv`
+- OpenAI API key in `../.env`
+- Python 3.7+ (for `asyncio.run()`)
+
+**Performance Benefit**:
+Instead of executing tasks sequentially (Sum of all execution times), parallel execution reduces total runtime to the longest individual chain's execution time, ideal for I/O-bound operations like LLM API calls.
+
+---
+
 ## Setting Up Environment
 
 Before running any agent script, ensure you have:
