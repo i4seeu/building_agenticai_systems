@@ -195,6 +195,107 @@ Instead of executing tasks sequentially (Sum of all execution times), parallel e
 
 ---
 
+### 5. Reflection Code (`reflection_code.py`)
+
+**Purpose**: Demonstrates an iterative self-improvement loop where an AI agent generates code, reflects on it critically, and refines it based on feedback until it meets all requirements.
+
+**Technique**:
+- **Iteration Loop** (up to 3 cycles):
+  - **Stage 1 (Generate/Refine)**: Generate initial Python code or refine it based on previous critiques
+  - **Stage 2 (Reflect)**: Act as a senior code reviewer and provide detailed critiques
+  - **Stage 3 (Stopping Condition)**: Check if code is perfect; if yes, exit; if no, loop back to refine
+
+**Key Concepts**:
+- Self-reflection and iterative improvement
+- Multi-role agent (generator + code reviewer)
+- Message history for conversational context
+- Code review checklist (bugs, style, edge cases, requirements)
+- Stopping conditions based on quality criteria
+
+**Workflow**:
+```
+Input Task Description
+    ↓
+┌─────────────────────────────────────┐
+│  ITERATION LOOP (max 3 cycles):     │
+├─────────────────────────────────────┤
+│                                     │
+│  Stage 1: Generate/Refine Code      │
+│       ↓                             │
+│  Stage 2: Critique as Code Reviewer │
+│       ↓                             │
+│  Stage 3: Check if CODE_IS_PERFECT  │
+│       ↓ (if not)                    │
+│  Add critique to history            │
+│  Loop back to Stage 1               │
+│       ↓ (if perfect)                │
+│  Exit Loop                          │
+└─────────────────────────────────────┘
+    ↓
+Output Final Refined Code
+```
+
+**Example Workflow**:
+The script demonstrates generating a `calculate_factorial()` function:
+1. **Iteration 1**: Generate initial factorial function
+2. **Iteration 2**: Critique code (e.g., add better docstrings, handle edge cases)
+3. **Iteration 3**: Refine based on feedback; if perfect, return final result
+
+**Usage**:
+```bash
+# Ensure OPENAI_API_KEY is set in ../.env
+python reflection_code.py
+```
+
+**Output Example**:
+```
+========================= REFLECTION LOOP: ITERATION 1 ==========================
+
+>>> STAGE 1: GENERATING initial code...
+
+--- Generated Code (v1) ---
+def calculate_factorial(n):
+    if n < 0:
+        raise ValueError("Factorial is not defined for negative numbers.")
+    if n == 0:
+        return 1
+    return n * calculate_factorial(n - 1)
+
+========================= REFLECTION LOOP: ITERATION 2 ==========================
+
+>>> STAGE 1: REFINING code based on previous critique...
+
+>>> STAGE 2: REFLECTING on the generated code...
+
+--- Critique ---
+- Add type hints for clarity
+- Include more detailed docstring
+- Consider iterative approach for large inputs (avoid stack overflow)
+
+========================= FINAL RESULT ===========================
+
+Final refined code after the reflection process:
+def calculate_factorial(n: int) -> int:
+    """
+    Calculate the factorial of a non-negative integer.
+    ...
+    """
+```
+
+**Requirements**:
+- `langchain-openai`
+- `langchain-core`
+- `dotenv`
+- OpenAI API key in `../.env` (uses `gpt-4o` for better reasoning)
+
+**Use Cases**:
+- Code generation and iterative refinement
+- Automated code review and improvement
+- Educational demonstrations of AI-driven development
+- Multi-stage problem solving with feedback loops
+
+---
+
 ## Setting Up Environment
 
 Before running any agent script, ensure you have:
