@@ -296,6 +296,99 @@ def calculate_factorial(n: int) -> int:
 
 ---
 
+### 6. Tool Use Agents (`tool_use_agents.py`)
+
+**Purpose**: Demonstrates how agents can use external tools and functions to answer queries more accurately. The agent decides when and which tools to call based on user input.
+
+**Technique**:
+- **Define Tools**: Create reusable tools as decorated functions with clear docstrings describing their purpose
+- **Create Agent**: Use `create_agent()` to build an agent with access to tools
+- **Agent Loop**: The agent receives a query, decides if it needs a tool, calls it, and synthesizes the result
+- **Stream Processing**: Use LangGraph's `.stream()` API to get real-time updates as the agent processes queries
+
+**Key Concepts**:
+- Tool definition with `@langchain_tool` decorator
+- LangChain's tool-calling mechanism for function invocation
+- Agent reasoning and tool selection
+- Message-based interaction model
+- Event streaming for real-time feedback
+
+**Tool Example**:
+The script includes a `search_information` tool that simulates a search engine:
+```python
+@langchain_tool
+def search_information(query: str) -> str:
+    """Provides factual information on a given topic."""
+    # Simulated search results
+    return f"Result for '{query}': ..."
+```
+
+**Workflow**:
+```
+User Query
+    ↓
+Agent (LLM) processes query
+    ↓
+Does query need a tool? 
+    ├─ Yes → Call appropriate tool(s)
+    │         ↓
+    │    Tool executes and returns result
+    │         ↓
+    │    Agent synthesizes tool output into response
+    │
+    └─ No → Agent provides direct response
+    ↓
+Stream result to user in real-time
+```
+
+**Usage**:
+```bash
+# Ensure OPENAI_API_KEY is set in ../.env
+python tool_use_agents.py
+```
+
+**Example Queries**:
+- "What is the capital of France?"
+- "Can you tell me the weather in London?"
+- "What's the population of Earth?"
+- "Which is the tallest mountain?"
+
+**Output Example**:
+```
+=== Tool-Using Agent Demo ===
+
+>>> User Query: What is the capital of France?
+
+--- 🛠 Tool Called: search_information with query: 'capital of france' ---
+--- TOOL RESULT: The capital of France is Paris. ---
+
+--- Agent Response ---
+The capital of France is Paris.
+```
+
+**Requirements**:
+- `langchain-openai`
+- `langchain-core`
+- `langchain` (for `create_agent`)
+- `dotenv`
+- OpenAI API key in `../.env`
+
+**Key Features**:
+- **Tool Discovery**: Tools are automatically available to the agent
+- **Semantic Understanding**: Agent understands which tool matches user intent
+- **Error Handling**: Graceful fallback if tool calls fail
+- **Extensibility**: Easy to add new tools by creating new decorated functions
+- **Debug Mode**: `debug=True` enables verbose logging of agent reasoning
+
+**Use Cases**:
+- Customer support agents with access to knowledge bases
+- Code analysis tools that can search documentation
+- Data retrieval agents with database access
+- Multi-capability assistants (calculator, search, translation, etc.)
+- Task automation with tool-assisted decision making
+
+---
+
 ## Setting Up Environment
 
 Before running any agent script, ensure you have:
