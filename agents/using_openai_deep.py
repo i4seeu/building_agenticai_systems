@@ -44,7 +44,7 @@ def initialize_client(api_key):
 
 def run_deep_research(client, system_message, user_query):
     """
-    Execute a deep research request using OpenAI's API.
+    Execute a deep research request using OpenAI's Deep Research API.
     
     Args:
         client: OpenAI client instance
@@ -52,22 +52,18 @@ def run_deep_research(client, system_message, user_query):
         user_query: The research question to investigate
     
     Returns:
-        Response object from the OpenAI API
+        Response object from the Deep Research API
     """
     print(f"\n📊 Running Deep Research for: {user_query}\n")
     
     try:
-        response = client.chat.completions.create(
+        response = client.messages.create(
             model="gpt-4-turbo",
-            max_tokens=4096,
+            max_tokens=16000,
             messages=[
                 {
-                    "role": "system",
-                    "content": system_message
-                },
-                {
                     "role": "user",
-                    "content": user_query
+                    "content": f"{system_message}\n\n{user_query}"
                 }
             ]
         )
